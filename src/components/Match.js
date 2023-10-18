@@ -26,7 +26,6 @@ function Puntuacion({partidosPronostico,onChangePartidosPronostico,numberOfMatch
 
   const onChangeRadio = ({target}) => {
     onChangePartidosPronostico(  prev =>  ({...prev,[numberOfMatch]:target.value}))
-    console.log({partidosPronostico})
     setEstePartido(target.value)
   }
   return (  

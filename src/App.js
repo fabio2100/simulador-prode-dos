@@ -10,6 +10,11 @@ function App() {
   <Match key={i} numberOfMatch={i} partidosPronostico={partidosPronostico} onChangePartidosPronostico={setPartidosPronostico}/>
   )
 
+  const simular = () => {
+    console.log(partidosPronostico);
+    Object.keys(partidosPronostico).length != n && console.log('alerta no todos partidos completos')
+  }
+
 
 
   return (
@@ -18,6 +23,14 @@ function App() {
          <h1>Su pronóstico</h1>
          {matchs}
       </div>
+      <button
+      type="button"
+      value="Simular"
+      className="btnSimular"
+      onClick={simular}
+    >
+      Simular resultados<i className="fas fa-vote-yea"></i>
+    </button>
     </div>
   );
 }
