@@ -21,7 +21,7 @@ function Team(){
     </div>)
 }
 
-function Puntuacion({partidosPronostico,onChangePartidosPronostico,numberOfMatch,isSimulado}){
+function Puntuacion({onChangePartidosPronostico,numberOfMatch,isSimulado}){
   const [estePartido,setEstePartido] = useState();
 
   const onChangeRadio = ({target}) => {
