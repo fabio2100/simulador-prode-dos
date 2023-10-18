@@ -1,25 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import Match from './components/Match'
+import { useState } from 'react';
 
 function App() {
+  const [partidosPronostico,setPartidosPronostico] = useState({})
+  const n = 8;
+  const matchs = [...Array(n)].map((e,i)=>
+  <Match key={i} numberOfMatch={i} partidosPronostico={partidosPronostico} onChangePartidosPronostico={setPartidosPronostico}/>
+  )
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main'>
+      <div id="pronosticos">
+         <h1>Su pronóstico</h1>
+         {matchs}
+      </div>
     </div>
   );
 }
+
 
 export default App;
