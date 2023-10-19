@@ -6,19 +6,26 @@ import { useState } from 'react';
 function App() {
   const [partidosPronostico,setPartidosPronostico] = useState({});
   const [partidosSimulados,setPartidosSimulados] = useState({});
-  const n = 8;
+  const n = 5;
+  const posiblesResultados = ['local','empate','visitante'];
   const matchs = [...Array(n)].map((e,i)=>
   <Match key={i} numberOfMatch={i} partidosPronostico={partidosPronostico} onChangePartidosPronostico={setPartidosPronostico}/>
   )
   
   const restulsMatch = ([...Array(n)].map((e,i)=>
-  <Match key={i+n} num={i+n} isSimulado={true}  numberOfMatch={i} partidosSimulados={partidosSimulados} onChangePartidosSimulados={setPartidosSimulados}/>
+  <Match key={i+n} num={i+n} isSimulado={true}  numberOfMatch={i} partidosSimulados={partidosSimulados}/>
   ))
   const [resultados,setResultados] = useState(restulsMatch);
 
   const simular = () => {
     console.log(partidosPronostico);
-    Object.keys(partidosPronostico).length != n && console.log('alerta no todos partidos completos')
+    Object.keys(partidosPronostico).length !== n && console.log('alerta no todos partidos completos');
+    let arraySimulados = {};
+    for(var i=0;i<n;i++){
+      arraySimulados[i]=posiblesResultados[Math.floor(Math.random() * posiblesResultados.length)];
+    }
+    console.log({arraySimulados})
+    
   }
 
 
