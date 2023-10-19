@@ -2,10 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import Match from './components/Match'
 import { useEffect, useState } from 'react';
+import Modal from './components/Modal';
 
 function App() {
   const [partidosPronostico,setPartidosPronostico] = useState({});
-  const [cantidadPartidos,setCantidadPartidos] = useState(8);
+  const [cantidadPartidos,setCantidadPartidos] = useState(Math.floor(Math.random()*4)+3);
+  const [isModalOpen,setModalOpen] = useState(false);
+  const [aciertos,setAciertos] = useState();
+  const [completo,setCompleto] = useState(false);
   const posiblesResultados = ['local','empate','visitante'];
   let matchs = [...Array(cantidadPartidos)].map((e,i)=>
   <Match key={i} numberOfMatch={i} onChangePartidosPronostico={setPartidosPronostico}/>
@@ -18,7 +22,8 @@ function App() {
 
 
   const simular = () => {
-    Object.keys(partidosPronostico).length !== cantidadPartidos && console.log('alerta no todos partidos completos');
+    Object.keys(partidosPronostico).length === cantidadPartidos && setCompleto(true);
+    console.log({completo})
     
     let aciertos = 0;
     let aciertosObj=[];
@@ -32,15 +37,24 @@ function App() {
       }
     }
     console.log({aciertos})
+    setAciertos(aciertos)
     setResultados(([...Array(cantidadPartidos)].map((e,i)=>
       <Match key={i+cantidadPartidos} isSimulado={true}  numberOfMatch={i} resultado={resultadosSimulados[i]} isAcierto={aciertosObj[i]===true}/>
     )))
-    
+    setModalOpen(true);
   }
 
 
 
   return (
+  <>
+    {isModalOpen && <Modal onClose={()=>{setModalOpen(!isModalOpen)}}> 
+      <h1>Puntuación obtenida</h1>
+      <p>Acertaste {aciertos} de {cantidadPartidos} partidos</p>
+      {aciertos === cantidadPartidos && <p>Puntuación perfecta</p>}
+      {aciertos === 0 && <p>Mala suerte!</p>}
+      {!completo && <p>No se completaron todos los partidos</p>}
+    </Modal>}
     <div className='main'>
       <div id="pronosticos">
          <h1>Su pronóstico</h1>
@@ -59,6 +73,7 @@ function App() {
       Simular resultados<i className="fas fa-vote-yea"></i>
     </button>
     </div>
+    </>
   );
 }
 

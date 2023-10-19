@@ -1,23 +1,24 @@
 import escudo from '../img/barsaescudo.png';
+import escudoVisitante from '../img/Ancient.png'
 import { useState } from 'react';
 
 export default function Match({numberOfMatch,onChangePartidosPronostico,isSimulado,resultado,isAcierto}){
   return (
     <>
     <div className={isAcierto===undefined ? "matchMain" : isAcierto ? "matchMain acierto" : "matchMain noAcierto"}>
-      <Team />
+      <Team srcImg={escudo}/>
       <Puntuacion onChangePartidosPronostico={onChangePartidosPronostico} numberOfMatch={numberOfMatch} isSimulado={isSimulado} resultado={resultado}/>
-      <Team />
+      <Team srcImg={escudoVisitante}/>
     </div>
     </>
   )
 }
 
 
-function Team(){
+function Team({srcImg}){
   return (
     <div className="team">
-      <img src={escudo} className="img" alt="escudo equipo"></img>
+      <img src={srcImg} className="img" alt="escudo equipo"></img>
     </div>)
 }
 
