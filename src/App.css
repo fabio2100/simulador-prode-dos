@@ -72,6 +72,8 @@ body{
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(6, 62, 95, 0.897); /* Black w/ opacity */
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #444;
 }
 
 
@@ -102,3 +104,22 @@ body{
 }
 
 
+.title{
+  text-decoration: underline;
+}
+
+.info{
+  color: teal;
+}
+
+.perfect{
+  color: green;
+}
+
+.nada{
+  color: tomato;
+}
+
+.infoNumber{
+  font-size: 30px;
+}

@@ -23,20 +23,16 @@ function App() {
 
   const simular = () => {
     Object.keys(partidosPronostico).length === cantidadPartidos && setCompleto(true);
-    console.log({completo})
-    
     let aciertos = 0;
     let aciertosObj=[];
     const resultadosSimulados = {};
     for(var i = 0;i<cantidadPartidos;i++){
       resultadosSimulados[i]=posiblesResultados[Math.floor(Math.random() * posiblesResultados.length)];
       if(resultadosSimulados[i] == partidosPronostico[i]){
-        console.log('coincidencia');
         aciertos++;
         aciertosObj[i]=true;
       }
     }
-    console.log({aciertos})
     setAciertos(aciertos)
     setResultados(([...Array(cantidadPartidos)].map((e,i)=>
       <Match key={i+cantidadPartidos} isSimulado={true}  numberOfMatch={i} resultado={resultadosSimulados[i]} isAcierto={aciertosObj[i]===true}/>
@@ -49,11 +45,11 @@ function App() {
   return (
   <>
     {isModalOpen && <Modal onClose={()=>{setModalOpen(!isModalOpen)}}> 
-      <h1>Puntuación obtenida</h1>
-      <p>Acertaste {aciertos} de {cantidadPartidos} partidos</p>
-      {aciertos === cantidadPartidos && <p>Puntuación perfecta</p>}
-      {aciertos === 0 && <p>Mala suerte!</p>}
-      {!completo && <p>No se completaron todos los partidos</p>}
+      <h1 className='title'>Puntuación obtenida</h1>
+      <p className='info'>Acertaste <span className='infoNumber'>{aciertos}</span> de <span className='infoNumber'>{cantidadPartidos}</span> partidos</p>
+      {aciertos === cantidadPartidos && <p className='perfect'>Puntuación perfecta</p>}
+      {aciertos === 0 && <p className='nada'>Mala suerte!</p>}
+      {!completo && <p className='info'>No se completaron todos los partidos</p>}
     </Modal>}
     <div className='main'>
       <div id="pronosticos">
